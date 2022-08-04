@@ -63,7 +63,12 @@ final class ArgumentsBuilder
         foreach ($options[0] as $option) {
             switch ($option[0]) {
                 case '--suffix':
-                    $suffixes[] = $option[1];
+                    if (str_contains($option[1], ',')) {
+                        $suffixes = array_merge($suffixes, explode(',',(string) $option[1]));
+                    }
+                    else {
+                        $suffixes[] = $option[1];
+                    }
 
                     break;
 
